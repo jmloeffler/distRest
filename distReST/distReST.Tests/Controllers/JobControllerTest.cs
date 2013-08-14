@@ -25,22 +25,32 @@ namespace distReST.Tests.Controllers
             _testObject = new JobController(_repository.Object);
         }
 
+        [TestCleanup]
+        public void Teardown()
+        {
+            _repository.VerifyAll();
+        }
+
         [TestMethod]
         public void Get()
         {
-            // Arrange
-            var job = new Mock<Job>();
+            var job = new Mock<IJob>();
             _repository.Setup(r => r.GetJobs()).Returns(new []{job.Object});
 
-
-            // Act
             var result = _testObject.Get();
 
-            // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(1, result.Count());
             Assert.AreSame(job.Object, result.ElementAt(0));
         }
 
+        [TestMethod]
+        public void Put()
+        {
+            var job = new Mock<IJob>();
+            _repository.Setup(r => r.AddJob(job.Object));
+
+            _testObject.Put(1, job.Object);
+        }
     }
 }

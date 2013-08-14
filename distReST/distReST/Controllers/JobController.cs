@@ -18,25 +18,26 @@ namespace distReST.Controllers
         }
 
         // GET api/values
-        public IEnumerable<Job> Get()
+        public IEnumerable<IJob> Get()
         {
             return _repository.GetJobs();
         }
 
         // GET api/values/5
-        public Job Get(int id)
+        public IJob Get(int id)
         {
             throw new NotImplementedException();
         }
 
         // POST api/values
-        public void Post([FromBody]Job value)
+        public void Post([FromBody]IJob value)
         {
         }
 
         // PUT api/values/5
-        public void Put(int id, [FromBody]Job value)
+        public void Put(int id, [FromBody]IJob job)
         {
+            _repository.AddJob(job);
         }
 
         // DELETE api/values/5

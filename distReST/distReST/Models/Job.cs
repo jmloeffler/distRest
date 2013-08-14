@@ -8,7 +8,8 @@ namespace distReST.Models
     public interface IJob
     { }
 
-    public class Job
+    public class Job : IJob
     {
+        
     }
 }
